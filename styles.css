@@ -1,0 +1,228 @@
+@import url("https://fonts.googleapis.com/css2?family=Raleway:ital,wght@0,100..900;1,100..900&display=swap");
+:root {
+  --main-color: rgb(0, 255, 255);
+  --bg-blue: rgba(0, 255, 255, 0.2);
+  --bg-red: rgba(255, 0, 0, 0.2);
+  --lines-color: rgb(51, 51, 51);
+}
+
+* {
+  padding: 0;
+  margin: 0;
+  box-sizing: border-box;
+}
+
+html {
+  color-scheme: dark;
+}
+html:has(#toggle-theme:checked) {
+  color-scheme: light;
+  --bg-blue: rgba(0, 255, 255, 0.5);
+  --bg-red: rgba(255, 0, 0, 0.5);
+  background-color: #888;
+}
+html:has(#toggle-theme:checked) button.ghost,
+html:has(#toggle-theme:checked) label.ghost {
+  background: rgba(0, 0, 0, 0.1);
+}
+html:has(#toggle-theme:checked) button.ghost svg,
+html:has(#toggle-theme:checked) label.ghost svg {
+  color: #000;
+}
+html:has(#toggle-theme:checked) button.ghost:hover svg,
+html:has(#toggle-theme:checked) label.ghost:hover svg {
+  color: var(--main-color);
+}
+html:has(#toggle-theme:checked) nav {
+  font-weight: 600;
+}
+
+@property --fx {
+  syntax: "<length> | <percentage>";
+  inherits: false;
+  initial-value: 9%;
+}
+@property --fy {
+  syntax: "<length> | <percentage>";
+  inherits: false;
+  initial-value: 15%;
+}
+@property --mx {
+  syntax: "<length> | <percentage>";
+  inherits: false;
+  initial-value: 90%;
+}
+@property --my {
+  syntax: "<length> | <percentage>";
+  inherits: false;
+  initial-value: 84%;
+}
+body {
+  --thickness: 1px;
+  --size: 35px;
+  --end: calc(var(--size) + var(--thickness));
+  --fx: 9%;
+  --fy: 15%;
+  --mx: 90%;
+  --my: 84%;
+  min-height: 100vh;
+  background-image: repeating-linear-gradient(90deg, var(--lines-color) 0px var(--thickness), transparent var(--thickness) var(--end)), repeating-linear-gradient(0deg, var(--lines-color) 0px var(--thickness), transparent var(--thickness) var(--end)), radial-gradient(circle at var(--fx) var(--fy), var(--bg-blue), transparent 200px), radial-gradient(circle at var(--mx) var(--my), var(--bg-red), transparent 200px);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  animation: F 15s ease infinite alternate, M 12s ease infinite alternate;
+}
+
+@keyframes F {
+  0% {
+    --fx: 9%;
+    --fy: 15%;
+  }
+  16% {
+    --fx: 91%;
+    --fy: 15%;
+  }
+  32% {
+    --fx: 9%;
+    --fy: 15%;
+  }
+  48% {
+    --fx: 9%;
+    --fy: 42.5%;
+  }
+  64% {
+    --fx: 91%;
+    --fy: 42.5%;
+  }
+  80% {
+    --fx: 9%;
+    --fy: 42.5%;
+  }
+  100% {
+    --fx: 9%;
+    --fy: 85%;
+  }
+}
+@keyframes M {
+  0% {
+    --mx: 90%;
+    --my: 84%;
+  }
+  25% {
+    --mx: 90%;
+    --my: 16%;
+  }
+  50% {
+    --mx: 45%;
+    --my: 45%;
+  }
+  75% {
+    --mx: 10%;
+    --my: 16%;
+  }
+  100% {
+    --mx: 10%;
+    --my: 84%;
+  }
+}
+h3 {
+  transition: 222ms;
+}
+
+body,
+button {
+  font-family: "Raleway", system-ui;
+}
+
+button,
+label,
+a {
+  cursor: pointer;
+}
+
+button,
+label {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border: none;
+  outline: none;
+}
+button.ghost,
+label.ghost {
+  aspect-ratio: 1;
+  width: 33px;
+  padding: 4px;
+  background: rgba(255, 255, 255, 0.1);
+  border-radius: 50%;
+}
+button:hover svg,
+label:hover svg {
+  width: 100%;
+  height: 100%;
+  color: var(--main-color);
+  transition: 222ms;
+}
+
+a {
+  --duration: 222ms;
+  color: inherit;
+  text-decoration: none;
+}
+a.animated {
+  position: relative;
+  padding: 9px;
+  border-radius: 100vw;
+  transition: var(--duration);
+}
+a.animated:hover {
+  background: rgba(255, 255, 255, 0.1);
+  color: var(--main-color);
+}
+a.animated:hover::before {
+  width: 100%;
+}
+a.animated:hover::after {
+  opacity: 1;
+  pointer-events: visible;
+  transform: translateX(-50%) scale(1);
+  transition: var(--duration);
+}
+a.animated::before {
+  content: "";
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 0%;
+  height: 2px;
+  background: var(--main-color);
+  transition: var(--duration);
+  pointer-events: none;
+}
+a.animated::after {
+  content: attr(data-tooltip);
+  color: #fff;
+  position: absolute;
+  width: -moz-fit-content;
+  width: fit-content;
+  top: 100%;
+  left: 50%;
+  transform: translateX(-50%) scale(0.8);
+  background: rgb(31, 41, 55);
+  border-radius: 9px;
+  transition: var(--duration);
+  padding: 12px;
+  white-space: nowrap;
+  opacity: 0;
+  pointer-events: none;
+}
+
+header {
+  display: flex;
+  align-items: center;
+  gap: 5px;
+  margin-top: 12px;
+}
+.hidden {
+  display: none;
+}

@@ -125,10 +125,6 @@ body {
     --my: 84%;
   }
 }
-h3 {
-  transition: 222ms;
-}
-
 body,
 button {
   font-family: "Raleway", system-ui;
@@ -217,11 +213,22 @@ a.animated::after {
   pointer-events: none;
 }
 
+@media (max-width: 500px) {
+  header h3 {
+    margin-inline: auto;
+    text-align: center;
+  }
+}
 header {
   display: flex;
   align-items: center;
   gap: 5px;
   margin-top: 12px;
+  max-width: 90%;
+  flex-wrap: wrap;
+}
+header h3 {
+  transition: 222ms;
 }
 .hidden {
   display: none;
